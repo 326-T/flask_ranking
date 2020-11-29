@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="base" style="text-align:center;vertical-align: middle;background-color:#CCCCCC;">
+        <div class="h_third">
+            <p style="padding-top:100px;font-size:50px;">終了です。</p>
+            <p style="padding:40px;font-size:50px;;">お疲れ様でした。</p>
+            <div class="h_third">
+                <div class="b_base">
+                    <div class="w_eighth"></div>
+                    <div class="w_forth">
+                        <form action="/back" method="post">
+                            <button style="width:100%;padding:15px;font-size:20px;margin-top:30px;margin-bottom:30px;background-color:#EEEEEE;" name="back" value="back">戻る</button>
+                        </form>
+                    </div>
+                    <div class="w_forth">
+                        <form action="/quit" method="post">
+                            <button style="width:100%;padding:15px;font-size:20px;margin-top:30px;margin-bottom:30px;background-color:#EEEEEE;" name="quit" value="quit">中断</button>
+                        </form>
+                    </div>
+                    <div class="w_forth">
+                        <form action="/clear" method="post">
+                            <button style="width:100%;padding:15px;font-size:20px;margin-top:30px;margin-bottom:30px;background-color:#EEEEEE;" name="clear" value="clear">最初から</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="w_eighth"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

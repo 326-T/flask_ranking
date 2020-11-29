@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="base">
+        <div class="movie_base">
+            <div class="w_half" style="border:solid 1px gray;box-sizing:border-box;background-color:#CCCCCC;">
+                <h1>{{player[0]}}</h1>
+                <video width="912px" height="513px" src={{url[0]}} controls></video>
+            </div>
+            <div class="w_half" style="border: solid 1px gray;box-sizing:border-box;background-color:#CCCCCC;">
+                <h1>{{player[1]}}</h1>
+                <video width="912px" height="513px" src={{url[1]}} controls></video>
+            </div>
+        </div>
+        <div class="q_base" style="border:solid 1px gray;box-sizing: border-box;background-color:#CCCCCC;">
+            <div class="h_third">
+                <p style="width:100%;padding-top:20px;margin:10px;font-size:30px;">{{question}}</p>
+            </div>
+            <div class="h_third">
+                <div class="b_base">
+                    <div class="w_forth">
+                        <form action="/answer" method="post">
+                            <button style="width:100%;padding:15px;font-size:20px;background-color:#EEEEEE;" name="answer" value="2">{{choice[0]}}</button>
+                        </form>
+                    </div>
+                    <div class="w_forth">
+                        <form action="/answer" method="post">
+                            <button style="width:100%;padding:15px;font-size:20px;background-color:#EEEEEE;" name="answer" value="1">{{choice[1]}}</button>
+                        </form>
+                    </div>
+                    <div class="w_forth">
+                        <form action="/answer" method="post">
+                            <button style="width:100%;padding:15px;font-size:20px;background-color:#EEEEEE;" name="answer" value="-1">{{choice[2]}}</button>
+                        </form>
+                    </div>
+                    <div class="w_forth">
+                        <form action="/answer" method="post">
+                            <button style="width:100%;padding:15px;font-size:20px;background-color:#EEEEEE;" name="answer" value="-2">{{choice[3]}}</button>
+                        </form>
+                    </div>    
+                    </form>
+                </div>
+            </div>
+            <div class="h_third">
+                <div class="b_base">
+                    <div class="w_eighth"></div>
+                    <div class="w_forth">
+                        <form action="/back" method="post">
+                            <button style="width:100%;padding:15px;font-size:20px;margin-top:30px;margin-bottom:30px;background-color:#EEEEEE;" name="back" value="back">戻る</button>
+                        </form>
+                    </div>
+                    <div class="w_forth">
+                        <form action="/quit" method="post">
+                            <button style="width:100%;padding:15px;font-size:20px;margin-top:30px;margin-bottom:30px;background-color:#EEEEEE;" name="quit" value="quit">中断</button>
+                        </form>
+                    </div>
+                    <div class="w_forth">
+                        <form action="/clear" method="post">
+                            <button style="width:100%;padding:15px;font-size:20px;margin-top:30px;margin-bottom:30px;background-color:#EEEEEE;" name="clear" value="clear">最初から</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="w_eighth"></div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

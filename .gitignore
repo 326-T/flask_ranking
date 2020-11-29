@@ -1,0 +1,4 @@
+*~
+/app/static/movie/*
+/app/static/result/*
+/.venv/*

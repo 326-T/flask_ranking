@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="base" style="background-color:#CCCCCC;">
+        <div class="home_title">
+            <p style="width:100%;padding:20px;font-size:50px;">{{user}}さん</p>
+            <p style="width:100%;padding:20px;font-size:50px;">技術を選択してください</p>
+        </div>
+        <div class="home_q">
+            <div class="w_third">
+                <form action="/technique" method="post">
+                    <button style="width:100%;padding:15px;font-size:30px;background-color:#EEEEEE;" name="technique" value="drive">ドライブ</button>
+                </form>
+            </div>
+            <div class="w_third">
+                <form action="/technique" method="post">
+                    <button style="width:100%;padding:15px;font-size:30px;background-color:#EEEEEE;" name="technique" value="block">ブロック</button>
+                </form>
+            </div>
+            <div class="w_third">
+                <form action="/technique" method="post">
+                    <button style="width:100%;padding:15px;font-size:30px;background-color:#EEEEEE;" name="technique" value="push">ツッツキ</button>
+                </form>
+            </div>
+        </div>
+        <div class="home_q">
+            <div class="w_sixth"></div>
+            <div class="w_third">
+                <form action="/technique" method="post">
+                    <button style="width:100%;padding:15px;font-size:30px;background-color:#EEEEEE;" name="technique" value="stop">ストップ</button>
+                </form>
+            </div>
+            <div class="w_third">
+                <form action="/technique" method="post">
+                    <button style="width:100%;padding:15px;font-size:30px;background-color:#EEEEEE;" name="technique" value="flick">フリック</button>
+                </form>
+            </div>
+            <div class="w_sixth"></div>
+        </div>
+        <div class="h_fifth">
+            <form action="/logout" method="post">
+                <button style="padding:15px;font-size:30px;background-color:#EEEEEE;" name="logout" value="logout">ログアウト</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
