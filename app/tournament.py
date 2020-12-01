@@ -120,8 +120,9 @@ class Swiss_System_Tournament():
                     match_list.append([self.players[ranking[0]].name, self.players[ranking[i]].name])
                     ranking = np.delete(ranking, [0, i])
                     break
-                elif (i == len(ranking) - 1 or i == 3):
+                elif (i == len(ranking) - 1):
                     ranking = np.delete(ranking, 0)
+                    break
         
         return match_list
     
@@ -248,7 +249,37 @@ class Log():
         self.latest_result.clear()
         self.match_id = 0
 
+class Shuffle_Player():
+    def __init__(self, participants, technique=['drive', 'block', 'push', 'stop', 'flick']):
+        self.names = []
+        self.bye = []
+        for i in range(participants):
+            self.names.append('選手'+str(i+1))
+        if participants%2 == 1:
+            self.bye.append('Bye')
+        table = []
+        for i in range(len(technique)):
+            new_names = random.sample(self.names, len(self.names))
+            table.append(new_names + self.bye)
+        self.table = pd.DataFrame(data=table, index=technique, columns=self.names + self.bye)
+    
+    def Reset(self):
+        table = []
+        for i in range(len(self.table)):
+            table.append(random.sample(self.names, len(self.names)) + self.bye)
+        self.table = pd.DataFrame(data=table, index=self.table.index.values, columns=self.names + self.bye)
 
+    def Load(self, path):
+        if os.path.isfile(path):
+            self.table = pd.read_csv(path, index_col=0)
+        else:
+            print('First Login.')
+            self.Reset()
+        self.Save(path)
+
+    def Save(self, path):
+        self.table.to_csv(path)
+    
 def test_system():
     a = Swiss_System_Tournament(11)
     b = judge()

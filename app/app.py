@@ -1,9 +1,10 @@
 from flask import Flask,render_template,request
-from app.tournament import Player, Swiss_System_Tournament, call_player, Log
+from app.tournament import Player, Swiss_System_Tournament, call_player, Log, Shuffle_Player
 
 def make_match_format(match):
+    shuffled = [shuffle_player.table.at[technique, match[0]], shuffle_player.table.at[technique, match[1]]]
     player = match
-    url = ['/static/movie/' + technique + '/sub' + match[0].split('選手')[-1] + '_' + technique + '.mp4', '/static/movie/' + technique + '/sub' + match[1].split('選手')[-1] + '_' + technique + '.mp4']
+    url = ['/static/movie/' + technique + '/sub' + shuffled[0].split('選手')[-1] + '_' + technique + '.mp4', '/static/movie/' + technique + '/sub' + shuffled[1].split('選手')[-1] + '_' + technique + '.mp4']
     print(url)
     question = match[0] + 'と' + match[1] + 'ではどちらが上手ですか？'
     choice = [match[0] + 'の方が上手', 'どちらかといえば' + match[0] + 'の方が上手', 'どちらかといえば' + match[1] + 'の方が上手', match[1] + 'の方が上手']
@@ -12,6 +13,7 @@ def make_match_format(match):
 app = Flask(__name__)
 log = Log()
 swiss_tournament = Swiss_System_Tournament(11)
+shuffle_player = Shuffle_Player(11)
 technique = 'hoge'
 username = 'huga'
 
@@ -37,7 +39,8 @@ def tech():
     global technique
     technique = str(request.form.get('technique'))
     log.Clear()
-    swiss_tournament.Load('app/static/result/' + username + '_' + technique +  '.csv')
+    swiss_tournament.Load('app/static/result/' + username + '_' + technique + '.csv')
+    shuffle_player.Load('app/static/result/' + username + '.csv')
     log.Set_latest_match(swiss_tournament.Make_Match())
     player, url, question, choice = make_match_format(log.Get_next_match())
     if swiss_tournament.end:
