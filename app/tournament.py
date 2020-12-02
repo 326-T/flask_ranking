@@ -279,7 +279,16 @@ class Shuffle_Player():
 
     def Save(self, path):
         self.table.to_csv(path)
-    
+
+    def Reverse_Save(self, vs_table, technique, path):
+        names = []
+        for n in vs_table.index.values:
+            names.append(self.table.at[technique, n])
+        new_vs = vs_table.copy()
+        new_vs.index = names
+        new_vs.columns = names
+        new_vs.to_csv(path)
+
 def test_system():
     a = Swiss_System_Tournament(11)
     b = judge()

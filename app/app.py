@@ -39,11 +39,12 @@ def tech():
     global technique
     technique = str(request.form.get('technique'))
     log.Clear()
-    swiss_tournament.Load('app/static/result/' + username + '_' + technique + '.csv')
-    shuffle_player.Load('app/static/result/' + username + '.csv')
+    swiss_tournament.Load('app/static/result/log/' + username + '_' + technique + '.csv')
+    shuffle_player.Load('app/static/result/log/' + username + '.csv')
     log.Set_latest_match(swiss_tournament.Make_Match())
     player, url, question, choice = make_match_format(log.Get_next_match())
     if swiss_tournament.end:
+        shuffle_player.Reverse_Save(swiss_tournament.vs_table, technique, 'app/static/result/' + username + '_' + technique + '_final.csv')
         return render_template("end.html")
     else:
         return render_template("ranking.html",player=player,url=url,question=question,choice=choice)
@@ -58,11 +59,12 @@ def ans():
         next_match = log.Get_next_match()
         
     if len(next_match) == 0:
-        if swiss_tournament.end:
-            return render_template("end.html")
         swiss_tournament.Report_Match(log.latest_match, log.latest_result)
-        swiss_tournament.Save('app/static/result/' + username + '_' + technique + '.csv')
+        swiss_tournament.Save('app/static/result/log/' + username + '_' + technique + '.csv')
         log.Save()
+        if swiss_tournament.end:
+            shuffle_player.Reverse_Save(swiss_tournament.vs_table, technique, 'app/static/result/' + username + '_' + technique + '_final.csv')
+            return render_template("end.html")
         log.Set_latest_match(swiss_tournament.Make_Match())
         next_match = log.Get_next_match()
     
@@ -78,7 +80,7 @@ def back():
     else:
         if log.match_id == 0:
             swiss_tournament.Delete_Match(log.match_log[-1], log.result_log[-1])
-            swiss_tournament.Save('app/static/result/' + username + '_' + technique + '.csv')
+            swiss_tournament.Save('app/static/result/log/' + username + '_' + technique + '.csv')
 
         log.Back()
         next_match = log.Get_next_match()
@@ -91,7 +93,7 @@ def back():
 
 @app.route("/quit", methods=["POST"])
 def quit():
-    swiss_tournament.Save('app/static/result/' + username + '_' + technique +  '.csv')
+    swiss_tournament.Save('app/static/result/log/' + username + '_' + technique +  '.csv')
     return render_template("home.html", user=username)
 
 @app.route("/clear", methods=["POST"])
